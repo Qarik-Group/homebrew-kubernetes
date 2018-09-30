@@ -37,7 +37,7 @@ jobs:
     plan:
     - aggregate:
       - get: homebrew
-        resource: homebrew
+        resource: git
       - get: knctl
         resource: knctl
         trigger: true
@@ -59,7 +59,7 @@ jobs:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
           BINARY: "knctl-darwin-amd64"
-    - put: homebrew
+    - put: git
       params:
         repository: pushme/homebrew
         rebase: true
@@ -70,7 +70,7 @@ jobs:
     plan:
     - aggregate:
       - get: homebrew
-        resource: homebrew
+        resource: git
       - get: riff
         resource: riff
         trigger: true
@@ -94,13 +94,13 @@ jobs:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
           BINARY: riff-darwin-amd64.tgz
-    - put: homebrew
+    - put: git
       params:
         repository: pushme/homebrew
         rebase: true
 
 resources:
-- name: homebrew
+- name: git
   type: git
   source:
     uri: (( grab meta.github.uri ))
