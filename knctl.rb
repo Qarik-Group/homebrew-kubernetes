@@ -1,7 +1,7 @@
 require "FileUtils"
 
 class Knctl < Formula
-  homepage "https://github.com/starkandwayne/eden"
+  homepage "https://github.com/cppforlife/knctl"
 
   v = "v0.0.9" # CI Managed
   url "https://github.com/cppforlife/knctl/releases/download/#{v}/knctl-darwin-amd64"
