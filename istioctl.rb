@@ -10,7 +10,7 @@ class Istioctl < Formula
   sha256 "bbe709c37ea97a0d623e19547ece302fdf30527a628bda4a5731adc7b011dbce" # CI Managed
 
   def install
-    bin.install "istio-#{@@verNum}/bin/istioctl"
+    bin.install "bin/istioctl"
   end
 
   test do
