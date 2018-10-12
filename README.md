@@ -11,11 +11,13 @@ brew tap starkandwayne/kubernetes
 Current brews offered:
 
 - Other's tools:
+  - [istiocli](https://github.com/istio/istio)
   - [knctl](https://github.com/cppforlife/knctl)
   - [kwt](https://github.com/cppforlife/kwt)
   - [riff](https://github.com/projectriff/riff)
 
 ```plain
+brew install istiocli
 brew install knctl
 brew install kwt
 brew install riff
