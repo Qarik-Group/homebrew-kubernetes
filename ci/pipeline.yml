@@ -27,11 +27,45 @@ meta:
 groups:
 - name: (( grab meta.name ))
   jobs:
+  - istioctl
   - knctl
   - kwt
   - riff
 
 jobs:
+  - name: istioctl
+    public: true
+    serial: true
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: git
+      - get: istio
+        resource: istio
+        trigger: true
+    - task: update-homebrew
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: istio
+          path: recipe
+        outputs:
+        - name: pushme
+        run:
+          path: "homebrew/ci/scripts/update-homebrew.sh"
+          args:
+          - istioctl.rb
+        params:
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          BINARY: "istio-*-osx.tar.gz"
+    - put: git
+      params:
+        repository: pushme/homebrew
+        rebase: true
+
   - name: knctl
     public: true
     serial: true
@@ -140,6 +174,13 @@ resources:
     uri: (( grab meta.github.uri ))
     branch: (( grab meta.github.branch ))
     private_key : (( grab meta.github.private_key ))
+
+- name: istio
+  type: github-release
+  source:
+    user: istio
+    repository: istio
+    access_token: (( grab meta.github.access_token ))
 
 - name: knctl
   type: github-release
