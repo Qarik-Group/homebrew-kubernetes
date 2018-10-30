@@ -3,10 +3,10 @@ require "FileUtils"
 class Kwt < Formula
   homepage "https://github.com/cppforlife/kwt"
 
-  v = "v0.0.3" # CI Managed
+  v = "v0.0.4" # CI Managed
   url "https://github.com/cppforlife/kwt/releases/download/#{v}/kwt-darwin-amd64"
   version v
-  sha256 "a99d3c7ab4bed153f17c1482ccb018f316e1256dfa2f8787d69360500e717492" # CI Managed
+  sha256 "a4e2812662f832005cf083003754dc2c84d014ee535470ef83c70c6d8de0bbcf" # CI Managed
 
   def install
     FileUtils.mv("kwt-darwin-amd64", "kwt")
