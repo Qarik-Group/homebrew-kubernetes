@@ -3,10 +3,10 @@ require "FileUtils"
 class Knctl < Formula
   homepage "https://github.com/cppforlife/knctl"
 
-  v = "v0.0.10" # CI Managed
+  v = "v0.1.0" # CI Managed
   url "https://github.com/cppforlife/knctl/releases/download/#{v}/knctl-darwin-amd64"
   version v
-  sha256 "63aabc5021476a17e18b425a8976b4c305fc2fdd06318a1360004b3250a60749" # CI Managed
+  sha256 "e98d9931bca05dd545c25acddc1366fa78cb3b5bacb5110b59fefa0c1fb3f0a5" # CI Managed
 
   def install
     FileUtils.mv("knctl-darwin-amd64", "knctl")
