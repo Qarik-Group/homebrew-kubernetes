@@ -233,8 +233,8 @@ resources:
 - name: minica
   type: github-release
   source:
-    user: jsha
-    repository: minica
+    user: starkandwayne
+    repository: minica-binaries
     access_token: (( grab meta.github.access_token ))
 
 - name: riff
