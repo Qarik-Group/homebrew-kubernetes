@@ -6,7 +6,7 @@ class Minica < Formula
   v = "v1.0.1" # CI Managed
   url "https://github.com/starkandwayne/minica-binaries/releases/download/#{v}/minica-darwin-amd64"
   version v
-  sha256 "" # CI Managed
+  sha256 "8dccc08cc9e46e36da12b525db7acd84fedb70938ba4618c775d34be69b43801" # CI Managed
 
   def install
     FileUtils.mv("minica-darwin-amd64", "minica")
