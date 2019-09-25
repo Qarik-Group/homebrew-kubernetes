@@ -11,7 +11,7 @@ meta:
     type: docker-image
     source:
       repository: starkandwayne/concourse-go
-      tag: 1.10
+      tag: 1.13
 
   github:
     uri:          (( concat "git@github.com:" meta.github.owner "/" meta.github.repo ))
@@ -30,6 +30,7 @@ groups:
   - istioctl
   - knctl
   - kwt
+  - minica
   - riff
 
 jobs:
@@ -132,6 +133,39 @@ jobs:
         repository: pushme/homebrew
         rebase: true
 
+  - name: minica
+    public: true
+    serial: true
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: git
+      - get: minica
+        resource: minica
+        trigger: true
+    - task: update-homebrew
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: minica
+          path: recipe
+        outputs:
+        - name: pushme
+        run:
+          path: "homebrew/ci/scripts/update-homebrew.sh"
+          args:
+          - minica.rb
+        params:
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          BINARY: "minica-darwin-amd64"
+    - put: git
+      params:
+        repository: pushme/homebrew
+        rebase: true
+
   - name: riff
     public: true
     serial: true
@@ -194,6 +228,13 @@ resources:
   source:
     user: cppforlife
     repository: kwt
+    access_token: (( grab meta.github.access_token ))
+
+- name: minica
+  type: github-release
+  source:
+    user: jsha
+    repository: minica
     access_token: (( grab meta.github.access_token ))
 
 - name: riff
