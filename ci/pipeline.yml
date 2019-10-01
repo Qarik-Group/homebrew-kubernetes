@@ -28,6 +28,7 @@ groups:
 - name: (( grab meta.name ))
   jobs:
   - istioctl
+  - knative-client
   - knctl
   - kwt
   - minica
@@ -95,6 +96,39 @@ jobs:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
           BINARY: "knctl-darwin-amd64"
+    - put: git
+      params:
+        repository: pushme/homebrew
+        rebase: true
+
+  - name: knative-client
+    public: true
+    serial: true
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: git
+      - get: knative-client
+        resource: knative-client
+        trigger: true
+    - task: update-homebrew
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: knative-client
+          path: recipe
+        outputs:
+        - name: pushme
+        run:
+          path: "homebrew/ci/scripts/update-homebrew.sh"
+          args:
+          - knative-client.rb
+        params:
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          BINARY: "kn-darwin-amd64"
     - put: git
       params:
         repository: pushme/homebrew
@@ -214,6 +248,14 @@ resources:
   source:
     user: istio
     repository: istio
+    access_token: (( grab meta.github.access_token ))
+
+- name: knative-client
+  type: github-release
+  source:
+    user: knative
+    repository: client
+    pre_release: true
     access_token: (( grab meta.github.access_token ))
 
 - name: knctl
