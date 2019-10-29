@@ -12,7 +12,4 @@ class KpackLogs < Formula
     bin.install "logs"
   end
 
-  test do
-    system "#{bin}/logs", "version"
-  end
 end
