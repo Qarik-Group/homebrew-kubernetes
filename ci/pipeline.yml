@@ -30,6 +30,7 @@ groups:
   - istioctl
   - knative-client
   - knctl
+  - kpack-logs
   - kwt
   - minica
   - riff
@@ -96,6 +97,39 @@ jobs:
           REPO_ROOT: homebrew
           REPO_OUT: pushme
           BINARY: "knctl-darwin-amd64"
+    - put: git
+      params:
+        repository: pushme/homebrew
+        rebase: true
+
+  - name: kpack-logs
+    public: true
+    serial: true
+    plan:
+    - aggregate:
+      - get: homebrew
+        resource: git
+      - get: kpack
+        resource: kpack
+        trigger: true
+    - task: update-homebrew
+      config:
+        platform: linux
+        image_resource: (( grab meta.image ))
+        inputs:
+        - name: homebrew
+        - name: kpack
+          path: recipe
+        outputs:
+        - name: pushme
+        run:
+          path: "homebrew/ci/scripts/update-homebrew.sh"
+          args:
+          - kpack-logs.rb
+        params:
+          REPO_ROOT: homebrew
+          REPO_OUT: pushme
+          BINARY: "logs-*-darwin.tgz"
     - put: git
       params:
         repository: pushme/homebrew
@@ -263,6 +297,14 @@ resources:
   source:
     user: cppforlife
     repository: knctl
+    access_token: (( grab meta.github.access_token ))
+
+- name: kpack
+  type: github-release
+  source:
+    owner: pivotal
+    repository: kpack
+    pre_release: true
     access_token: (( grab meta.github.access_token ))
 
 - name: kwt
