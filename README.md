@@ -21,7 +21,6 @@ Current brews offered:
 brew install kn
 brew install knctl
 brew install istiocli
-brew install kwt
 brew install riff
 ```
 

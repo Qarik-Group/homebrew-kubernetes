@@ -31,7 +31,6 @@ groups:
   - knative-client
   - knctl
   - kpack-logs
-  - kwt
   - minica
   - riff
 
@@ -168,39 +167,6 @@ jobs:
         repository: pushme/homebrew
         rebase: true
 
-  - name: kwt
-    public: true
-    serial: true
-    plan:
-    - aggregate:
-      - get: homebrew
-        resource: git
-      - get: kwt
-        resource: kwt
-        trigger: true
-    - task: update-homebrew
-      config:
-        platform: linux
-        image_resource: (( grab meta.image ))
-        inputs:
-        - name: homebrew
-        - name: kwt
-          path: recipe
-        outputs:
-        - name: pushme
-        run:
-          path: "homebrew/ci/scripts/update-homebrew.sh"
-          args:
-          - kwt.rb
-        params:
-          REPO_ROOT: homebrew
-          REPO_OUT: pushme
-          BINARY: "kwt-darwin-amd64"
-    - put: git
-      params:
-        repository: pushme/homebrew
-        rebase: true
-
   - name: minica
     public: true
     serial: true
@@ -305,13 +271,6 @@ resources:
     owner: pivotal
     repository: kpack
     pre_release: true
-    access_token: (( grab meta.github.access_token ))
-
-- name: kwt
-  type: github-release
-  source:
-    user: cppforlife
-    repository: kwt
     access_token: (( grab meta.github.access_token ))
 
 - name: minica
