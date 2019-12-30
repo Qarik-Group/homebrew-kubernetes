@@ -1,14 +1,11 @@
 ---
 meta:
   name: homebrew-kubernetes
-  target: ohio-sw
+  target: pipes@main
   # url: https://ci2.starkandwayne.com team: starkandwayne
 
   github:
     owner: starkandwayne
     repo: homebrew-kubernetes
-    private_key: ((github-private-key))
-    access_token: ((github-access-token))
-
-  pivnet:
-    api-token: ((pivnet-token))
+    private_key: ((github.private-key))
+    access_token: ((github.access-token))

@@ -21,9 +21,6 @@ meta:
     private_key:  (( param "Please generate an SSH Deployment Key for this repo and specify it here" ))
     access_token: (( param "Please generate a Personal Access Token and specify it here (read-only for repos, to avoid rate limiting)" ))
 
-  pivnet:
-    api-token: (( param "Please set api token for pivnet ))
-
 groups:
 - name: (( grab meta.name ))
   jobs:
