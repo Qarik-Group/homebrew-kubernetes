@@ -19,7 +19,10 @@ Current brews offered:
 
 ```plain
 brew install kn
+brew install knative-client
 brew install knctl
+brew install kpack-logs
+brew install minica
 brew install istiocli
 brew install riff
 ```
