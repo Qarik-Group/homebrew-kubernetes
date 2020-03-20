@@ -4,7 +4,7 @@ class KpackLogs < Formula
   homepage "https://github.com/pivotal/kpack"
 
   v = "v0.0.7" # CI Managed
-  url "https://github.com/pivotal/kpack/releases/download/#{v}/logs-#{v}-darwin.tgz"
+  url "https://github.com/pivotal/kpack/releases/download/#{v}/logs-#{v}-macos.tgz"
   version v
   sha256 "" # CI Managed
 
