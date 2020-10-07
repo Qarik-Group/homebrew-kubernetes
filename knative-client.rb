@@ -6,7 +6,7 @@ class KnativeClient < Formula
   v = "v0.18.0" # CI Managed
   url "https://github.com/knative/client/releases/download/#{v}/kn-darwin-amd64"
   version v
-  sha256 "24d47f3aa3e5d345cf593100ca5ca3198c3a0dbc771cd86b1e164ff2679c4a64" # CI Managed
+  sha256 "138fd3cbe7a4548c031d576a4f46adcd8c4e16760d21d28a92491cc6b1714b69" # CI Managed
 
   def install
     FileUtils.mv("kn-darwin-amd64", "kn")
