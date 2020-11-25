@@ -3,10 +3,10 @@ require "FileUtils"
 class KnativeClient < Formula
   homepage "https://github.com/knative/client"
 
-  v = "v0.19.0" # CI Managed
+  v = "v0.19.1" # CI Managed
   url "https://github.com/knative/client/releases/download/#{v}/kn-darwin-amd64"
   version v
-  sha256 "576af4e5c18cdbe7a9ebce62617f23f692b589500a09d57e8ea01590ebb0a836" # CI Managed
+  sha256 "1ec3f600501cf4caf8d5e203ec967f67836c50230ded7bce4fd72193de722f5c" # CI Managed
 
   def install
     FileUtils.mv("kn-darwin-amd64", "kn")
