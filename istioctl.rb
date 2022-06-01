@@ -3,11 +3,11 @@ require "FileUtils"
 class Istioctl < Formula
   homepage "https://github.com/istio/istio"
 
-  v = "v1.13.4" # CI Managed
+  v = "v1.14.0" # CI Managed
   @@verNum = v.sub "v", ""
   url "https://github.com/istio/istio/releases/download/#{@@verNum}/istio-#{@@verNum}-osx.tar.gz"
   version v
-  sha256 "be571d4a2ee5d28dee93e68ad41b40e9151fa2e76af9a34ead7d9bfa8c126e5c" # CI Managed
+  sha256 "ee19c8cfcc36eb115df22e1e1d39c207bfdbc75044e9554d0b120981278810bc" # CI Managed
 
   def install
     bin.install "bin/istioctl"
